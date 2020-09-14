@@ -1,5 +1,8 @@
 package com.denno.internetcheck
 
+import android.app.Service
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.util.Log
 import com.google.android.material.snackbar.Snackbar
@@ -18,6 +21,10 @@ class MainActivity : AppCompatActivity() {
     private var connectivityDisposable: Disposable? = null
     private var internetDisposable: Disposable? = null
 
+    var context = this
+    var connectivity : ConnectivityManager? = null
+    var info : NetworkInfo? = null
+
     companion object {
         private val TAG = "ConnectivityCheck"
     }
@@ -28,8 +35,37 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+
+
+            connectivity = context.getSystemService(Service.CONNECTIVITY_SERVICE)
+
+                    as ConnectivityManager
+
+            if ( connectivity != null)
+            {
+                info = connectivity!!.activeNetworkInfo
+
+                if (info != null)
+                {
+                    if (info!!.state == NetworkInfo.State.CONNECTED)
+                    {
+//                        Toast.makeText(context, "CONNECTED", Toast.LENGTH_LONG).show()
+                        Snackbar.make(view, "CONNECTED", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show()
+
+                    }
+                }
+                else
+                {
+//                    Toast.makeText(context, "NOT CONNECTED", Toast.LENGTH_LONG).show()
+                    Snackbar.make(view, "NOT CONNECTED", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show()
+                }
+            }
+
+
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                .setAction("Action", null).show()
         }
     }
 
