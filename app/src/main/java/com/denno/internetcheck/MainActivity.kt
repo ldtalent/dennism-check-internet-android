@@ -49,23 +49,18 @@ class MainActivity : AppCompatActivity() {
                 {
                     if (info!!.state == NetworkInfo.State.CONNECTED)
                     {
-//                        Toast.makeText(context, "CONNECTED", Toast.LENGTH_LONG).show()
-                        Snackbar.make(view, "CONNECTED", Snackbar.LENGTH_LONG)
+                        Snackbar.make(view, "Internet Connected", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show()
 
                     }
                 }
                 else
                 {
-//                    Toast.makeText(context, "NOT CONNECTED", Toast.LENGTH_LONG).show()
-                    Snackbar.make(view, "NOT CONNECTED", Snackbar.LENGTH_LONG)
+                    Snackbar.make(view, "Internet Disconnected", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show()
                 }
             }
 
-
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show()
         }
     }
 
